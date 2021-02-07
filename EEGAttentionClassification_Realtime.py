@@ -4,7 +4,6 @@ import numpy as np
 import scipy as sp
 from scipy.stats import binned_statistic
 from matplotlib import pyplot as plt
-import EEG_feature_extraction as feature_extract
 from sklearn import metrics
 from sklearn.svm import SVC
 from sklearn.model_selection import train_test_split
@@ -14,6 +13,8 @@ from RingBuffer import RingBuffer
 import time
 from datetime import datetime
 from EEGAttentionClassification import feature_generation
+from firebase import firebase
+firebase = firebase.FirebaseApplication('https://eegattention-5f9a5-default-rtdb.firebaseio.com/')
 
 CLASSIFIER_FILE = "predict_attention.pkl"
 PATH_TO_MODEL = path.dirname(__file__)
@@ -50,7 +51,9 @@ def main(Fs=250,TBuffer=15):
         eeg_buffer.append(timepoint_data)
         time.sleep(period)
         if i%250 == 0:
-            print('Time: {:%Y-%m-%d %H:%M:%S}'.format(datetime.now())," - State Unknown")
+            timestamp = datetime.now()
+            print('Time: {:%Y-%m-%d %H:%M:%S}'.format(timestamp)," - State Unknown")
+
 
     #Iterate through remaining EEG values
     while i<full_EEG_data.shape[0]-1:
@@ -69,6 +72,9 @@ def main(Fs=250,TBuffer=15):
 
             #Vibrate vibration motor at this point
             print("Whoops, you aren't paying attention!")
+            timestamp = datetime.now()
+            post = {'Time of Lost Focus:': timestamp}
+            result = firebase.post("/user", post)
             button = input("Would you like to stop the vibration? Press Y to continue: ")
 
             if button == "Y":
@@ -86,12 +92,16 @@ def main(Fs=250,TBuffer=15):
                     i+=1
                     
                     if i%250 == 0:
-                        print('Time: {:%Y-%m-%d %H:%M:%S}'.format(datetime.now())," - State Unknown")
+                        timestamp = datetime.now()
+                        print('Time: {:%Y-%m-%d %H:%M:%S}'.format(timestamp)," - State Unknown")
+
 
             
         i+=1
         if i%250 == 0:
-            print('Time: {:%Y-%m-%d %H:%M:%S}'.format(datetime.now())," - Focused")
+            timestamp = datetime.now()
+            print('Time: {:%Y-%m-%d %H:%M:%S}'.format(timestamp)," - State Unknown")
+
 
 if __name__== '__main__':
     main()
