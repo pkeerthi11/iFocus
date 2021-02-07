@@ -19,7 +19,6 @@ Run the linear SVM classifier and save the model object in a .pkl file for futur
 # Sources:
 
 Dataset from: \
-
 https://www.kaggle.com/birdy654/eeg-mental-state-v2
 
 Signal processing and machine learning techniques: 
