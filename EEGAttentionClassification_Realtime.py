@@ -4,7 +4,6 @@ import numpy as np
 import scipy as sp
 from scipy.stats import binned_statistic
 from matplotlib import pyplot as plt
-import EEG_feature_extraction as feature_extract
 from sklearn import metrics
 from sklearn.svm import SVC
 from sklearn.model_selection import train_test_split
