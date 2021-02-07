@@ -1,6 +1,8 @@
 # iFocus
 Implementing an SVM classifier to determine attention states. 
 
+Test proof-of-concept real-time implementation using the EEGAttentionClassification_Realtime.py script. 
+
 Key functions:
 
 generate_epochs(file_path, TBuffer=15, time_index = 0)
