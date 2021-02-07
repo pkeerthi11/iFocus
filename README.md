@@ -21,6 +21,6 @@ Run the linear SVM classifier and save the model object in a .pkl file for futur
 Dataset from: \
 https://www.kaggle.com/birdy654/eeg-mental-state-v2
 
-Signal processing and machine learning techniques: \ 
+Signal processing and machine learning techniques: \\ 
 Acı Çİ, Kaya M, Mishchenko Y. Distinguishing mental attention states of humans via an EEG-based passive BCI using machine learning methods. Expert Systems with Applications. 2019 Nov 15;134:153-66. https://doi.org/10.1016/j.eswa.2019.05.057
 
